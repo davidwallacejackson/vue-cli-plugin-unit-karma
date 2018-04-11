@@ -1,5 +1,10 @@
+const merge = require('webpack-merge')
+
 module.exports = (webpackConfig) => {
   delete webpackConfig.entry
+  webpackConfig = merge(webpackConfig, {
+    devtool: 'inline-source-map'
+  })
 
   return {
     files: [
@@ -11,7 +16,7 @@ module.exports = (webpackConfig) => {
     frameworks: ['mocha', 'chai'],
 
     preprocessors: {
-      'tests/unit/index.js': ['webpack']
+      'tests/unit/index.js': ['webpack', 'sourcemap']
     },
 
     webpack: webpackConfig
