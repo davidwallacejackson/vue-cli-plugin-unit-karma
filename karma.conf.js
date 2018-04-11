@@ -34,6 +34,13 @@ module.exports = ({optionsForThisPlugin, webpackConfig, watch, junit}) => {
     }
   }
 
+  if (junit) {
+    karmaConfig.reporters.push('junit')
+    karmaConfig.junitReporter = {
+      outputDir: junit
+    }
+  }
+
   if (optionsForThisPlugin.karmaConfig) {
     // merge in karma config from project
     Object.assign(karmaConfig, optionsForThisPlugin.karmaConfig)

@@ -11,7 +11,7 @@ module.exports = (api, projectOptions) => {
       'usage': 'vue-cli-service test',
       options: {
         '--watch, -w': 'run in watch mode',
-        '--junit [filename], -j [filename]': 'output JUnit-style XML test report'
+        '--junit [dirname], -j [dirname]': 'output JUnit-style XML test reports for each browser'
       }
     },
     (args, rawArgv) => {
