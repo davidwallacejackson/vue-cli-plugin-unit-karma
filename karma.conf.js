@@ -10,7 +10,7 @@ module.exports = (optionsForThisPlugin, webpackConfig) => {
   let karmaConfig = {
     files: optionsForThisPlugin.files,
 
-    browsers: ['Chrome'],
+    browsers: ['Chrome', 'Firefox'],
 
     frameworks: ['mocha', 'chai'],
 
@@ -31,6 +31,5 @@ module.exports = (optionsForThisPlugin, webpackConfig) => {
     Object.assign(karmaConfig, optionsForThisPlugin.karmaConfig)
   }
 
-  console.log(karmaConfig)
   return karmaConfig
 }
