@@ -1,0 +1,21 @@
+{
+  "name": "vue-cli-plugin-unit-karma",
+  "version": "0.0.1",
+  "description": "Run unit tests in a @vue/cli project with Karma",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "David Jackson",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.1.2",
+    "karma": "^2.0.0",
+    "karma-chai": "^0.1.0",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-mocha": "^1.3.0",
+    "karma-webpack": "^3.0.0",
+    "mocha": "^5.0.5",
+    "webpack": "^3.11.0"
+  }
+}
