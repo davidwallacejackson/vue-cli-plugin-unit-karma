@@ -1,4 +1,10 @@
 module.exports = (api, projectOptions) => {
+  let optionsForThisPlugin = require('./config-defaults')
+
+  if (projectOptions.pluginOptions && projectOptions.pluginOptions.karma) {
+    Object.assign(optionsForThisPlugin, projectOptions.pluginOptions.karma)
+  }
+
   api.registerCommand('test',
     {
       'description': 'run unit tests with karma-webpack',
@@ -16,7 +22,7 @@ module.exports = (api, projectOptions) => {
         let generateKarmaConfig = require('./karma.conf')
 
         let server = new Server(
-          generateKarmaConfig(webpackConfigForTests),
+          generateKarmaConfig(optionsForThisPlugin, webpackConfigForTests),
           function (exitCode) {
             console.log('Karma has exited with ' + exitCode)
 
