@@ -1,6 +1,6 @@
 {
   "name": "vue-cli-plugin-unit-karma",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Run unit tests in a @vue/cli project with Karma",
   "main": "index.js",
   "scripts": {
