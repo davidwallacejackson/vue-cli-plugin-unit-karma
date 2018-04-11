@@ -1,7 +1,8 @@
-const merge = require('webpack-merge')
+const karmaConstants = require('karma').constants
 const _ = require('lodash')
+const merge = require('webpack-merge')
 
-module.exports = (optionsForThisPlugin, webpackConfig) => {
+module.exports = ({optionsForThisPlugin, webpackConfig, watch, junit}) => {
   delete webpackConfig.entry
   webpackConfig = merge(webpackConfig, {
     devtool: 'inline-source-map'
@@ -9,6 +10,13 @@ module.exports = (optionsForThisPlugin, webpackConfig) => {
 
   let karmaConfig = {
     files: optionsForThisPlugin.files,
+
+    logLevel: karmaConstants.LOG_ERROR,
+
+    reporters: ['mocha'],
+
+    autoWatch: watch,
+    singleRun: !watch,
 
     browsers: ['Chrome', 'Firefox'],
 

@@ -8,7 +8,11 @@ module.exports = (api, projectOptions) => {
   api.registerCommand('test',
     {
       'description': 'run unit tests with karma-webpack',
-      'usage': 'vue-cli-service test'
+      'usage': 'vue-cli-service test',
+      options: {
+        '--watch, -w': 'run in watch mode',
+        '--junit [filename], -j [filename]': 'output JUnit-style XML test report'
+      }
     },
     (args, rawArgv) => {
       api.setMode('test')
@@ -22,7 +26,12 @@ module.exports = (api, projectOptions) => {
         let generateKarmaConfig = require('./karma.conf')
 
         let server = new Server(
-          generateKarmaConfig(optionsForThisPlugin, webpackConfigForTests),
+          generateKarmaConfig({
+            optionsForThisPlugin,
+            webpackConfig: webpackConfigForTests,
+            watch: args.watch || args.w,
+            junit: args.junit || args.j
+          }),
           function (exitCode) {
             console.log('Karma has exited with ' + exitCode)
 
