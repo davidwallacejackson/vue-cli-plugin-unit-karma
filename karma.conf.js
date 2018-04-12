@@ -46,10 +46,5 @@ module.exports = ({optionsForThisPlugin, webpackConfig, watch, junit}) => {
     Object.assign(karmaConfig, optionsForThisPlugin.karmaConfig)
   }
 
-  if (optionsForThisPlugin.expressServer) {
-    karmaConfig.frameworks.push('expressServer')
-    karmaConfig.expressServer = optionsForThisPlugin.expressServer
-  }
-
   return karmaConfig
 }

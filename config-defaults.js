@@ -10,14 +10,9 @@ module.exports = {
   ],
 
   /**
-   * Takes an object with `serverPort` and `extensions` keys, per karma-express-server:
-   * https://github.com/coreyferguson/karma-express-server
-   * 
-   * NOTE: the documentation incorrectly specifies `port` as the name for
-   * the port config key -- it's actually `serverPort`.
-   * 
-   * You can use this to start up a second HTTP server during tests -- for
-   * instance, to serve mock data.
+   * Takes an object with keys `port` (a Number) and `setup` (a function
+   * taking an express App object). You can use this to set up an
+   * Express server that will run alongside your tests.
    */
   expressServer: undefined,
 

@@ -22,10 +22,17 @@ module.exports = (api, projectOptions) => {
       webpackConfigForTests = webpackConfigForTests.toConfig()
 
       return new Promise((resolve, reject) => {
-        let Server = require('karma').Server
+        let KarmaServer = require('karma').Server
         let generateKarmaConfig = require('./karma.conf')
 
-        let server = new Server(
+        let expressServer
+        if (optionsForThisPlugin.expressServer) {
+          let expressApp = require('express')()
+          optionsForThisPlugin.expressServer.setup(expressApp)
+          expressServer = expressApp.listen(optionsForThisPlugin.expressServer.port)
+        }
+
+        let karmaServer = new KarmaServer(
           generateKarmaConfig({
             optionsForThisPlugin,
             webpackConfig: webpackConfigForTests,
@@ -35,6 +42,10 @@ module.exports = (api, projectOptions) => {
           function (exitCode) {
             console.log('Karma has exited with ' + exitCode)
 
+            if (expressServer) {
+              expressServer.close()
+            }
+
             if (exitCode === 0) {
               resolve(exitCode)
             } else {
@@ -42,7 +53,7 @@ module.exports = (api, projectOptions) => {
             }
           })
 
-        server.start()
+        karmaServer.start()
       })
     })
 }
