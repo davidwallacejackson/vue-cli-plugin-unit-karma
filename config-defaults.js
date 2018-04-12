@@ -10,6 +10,18 @@ module.exports = {
   ],
 
   /**
+   * Takes an object with `serverPort` and `extensions` keys, per karma-express-server:
+   * https://github.com/coreyferguson/karma-express-server
+   * 
+   * NOTE: the documentation incorrectly specifies `port` as the name for
+   * the port config key -- it's actually `serverPort`.
+   * 
+   * You can use this to start up a second HTTP server during tests -- for
+   * instance, to serve mock data.
+   */
+  expressServer: undefined,
+
+  /**
    * If provided, this will be merged into the base karma config for
    * the plugin.
    * 
