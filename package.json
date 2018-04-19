@@ -2,6 +2,13 @@
   "name": "vue-cli-plugin-unit-karma",
   "version": "0.3.0",
   "description": "Run unit tests in a @vue/cli project with Karma",
+  "keywords": [
+    "vue",
+    "cli",
+    "plugin",
+    "karma",
+    "testing"
+  ]
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
