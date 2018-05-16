@@ -5,7 +5,7 @@ module.exports = (api, projectOptions) => {
     Object.assign(optionsForThisPlugin, projectOptions.pluginOptions.karma)
   }
 
-  api.registerCommand('test',
+  api.registerCommand('test:unit',
     {
       'description': 'run unit tests with karma-webpack',
       'usage': 'vue-cli-service test',
@@ -15,11 +15,20 @@ module.exports = (api, projectOptions) => {
       }
     },
     (args, rawArgv) => {
-      api.setMode('test')
       let webpackConfigForTests = api.resolveChainableWebpackConfig()
         .target()
           .clear()
+
       webpackConfigForTests = webpackConfigForTests.toConfig()
+
+      // workaround for: https://github.com/webpack-contrib/karma-webpack/pull/325
+      // TODO: remove this when the above PR is merged
+      webpackConfigForTests.optimization = {
+        splitChunks: false,
+        runtimeChunk: false
+      }
+
+      webpackConfigForTests.mode = 'development'
 
       return new Promise((resolve, reject) => {
         let KarmaServer = require('karma').Server
@@ -56,4 +65,8 @@ module.exports = (api, projectOptions) => {
         karmaServer.start()
       })
     })
+}
+
+module.exports.defaultModes = {
+  'test:unit': 'test'
 }
