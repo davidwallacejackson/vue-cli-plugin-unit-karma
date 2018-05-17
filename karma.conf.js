@@ -1,5 +1,4 @@
 const karmaConstants = require('karma').constants
-const _ = require('lodash')
 const merge = require('webpack-merge')
 
 module.exports = ({optionsForThisPlugin, webpackConfig, watch, junit}) => {
@@ -22,10 +21,10 @@ module.exports = ({optionsForThisPlugin, webpackConfig, watch, junit}) => {
 
     frameworks: ['mocha', 'chai'],
 
-    preprocessors: _(optionsForThisPlugin.files)
-      .map((filenameOrPattern) => [filenameOrPattern, ['webpack', 'sourcemap']])
-      .fromPairs()
-      .value(),
+    preprocessors: optionsForThisPlugin.files.reduce((result, file) => {
+      result[file] = ['webpack', 'sourcemap']
+      return result;
+    }, {}),
 
     webpack: webpackConfig,
 
