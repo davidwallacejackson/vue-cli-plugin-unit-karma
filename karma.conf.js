@@ -5,7 +5,7 @@ const merge = require('webpack-merge')
 module.exports = ({optionsForThisPlugin, webpackConfig, watch, junit}) => {
   delete webpackConfig.entry
   webpackConfig = merge(webpackConfig, {
-    devtool: 'inline-source-map'
+    devtool: optionsForThisPlugin.devtool || 'inline-source-map'
   })
 
   let karmaConfig = {
