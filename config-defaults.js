@@ -5,8 +5,8 @@ module.exports = {
    * then loaded into karma.
    */
   files: [
-    'tests/**/*.spec.js',
-    'tests/**/*.spec.ts',
+    'tests/unit/**/*.spec.js',
+    'tests/unit/**/*.spec.ts',
   ],
 
   /**
