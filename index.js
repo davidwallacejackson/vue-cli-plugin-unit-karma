@@ -15,11 +15,11 @@ module.exports = (api, projectOptions) => {
       }
     },
     (args, rawArgv) => {
-      let webpackConfigForTests = api.resolveChainableWebpackConfig()
-        .target()
-          .clear()
+      api.chainWebpack((chain) => {
+        chain.delete('target');
+      });
 
-      webpackConfigForTests = webpackConfigForTests.toConfig()
+      webpackConfigForTests = api.resolveWebpackConfig();
 
       // workaround for: https://github.com/webpack-contrib/karma-webpack/pull/325
       // TODO: remove this when the above PR is merged
